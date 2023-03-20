@@ -1,0 +1,65 @@
+// The Welfare Crook problem		cxd 6/2/14
+//
+// Three lists of names in alphabetical order (no duplicates).
+// Locate the person on all three lists.
+//
+// "The names have been changed to protect the innocent."
+//
+
+
+#include <iostream>
+#include <list>
+#include <string>
+
+using namespace std;
+
+using IT = list<string>::iterator;
+
+int main()
+{
+    list<string> ibm = { "ANDREW", "ANTHONY", "ARTHUR", "BRIAN", "CARL",
+       			"CHARLES", "CHRISTOPHER", "DANIEL", "DAVID", "FRANK" };
+
+    list<string> columbiaU = { "DENNIS", "DONALD", "DOUGLAS", "EDWARD", "ERIC",
+			"FRANK", "GARY", "GEORGE", "GREGORY", "HAROLD" };
+
+    list<string> welfare = { "FRANK", "HENRY", "JACK", "JAMES", "JASON", "JEFFREY",
+       			"JERRY", "JOE", "JOHN", "JOSE", "JOSEPH", "JOSHUA" };
+
+    IT itA = 		ibm.begin();
+    IT itLastA =	ibm.end();
+    IT itB =		columbiaU.begin();
+    IT itLastB =	columbiaU.end();
+    IT itC =		welfare.begin();
+    IT itLastC = 	welfare.end();
+
+    for (; (itA != itLastA)
+	    && (itB != itLastB)
+	    && (itC != itLastC); )
+    {
+	if ((*itA == *itB) && (*itB == *itC) && (*itC == *itA))
+	{
+	   cout << "Welfare Crook is " << *itA << endl;
+	  ++itA; ++itB; ++itC;
+	 continue;
+	}
+       else
+       {
+	   if ((*itA < *itB) || (*itA < *itC))
+	   {
+	       cout << "skipping " << *itA << endl;
+	       ++itA;
+	   }
+	   else if ((*itB < *itC) || (*itB < *itA))
+	   {
+	       cout << "skipping " << *itB << endl;
+	       ++itB;
+	   }
+	   else if ((*itC < *itA) || (*itC < *itB))
+	   {
+	       cout << "skipping " << *itC << endl;
+	       ++itC;
+	   }
+       }	   
+    }
+}
